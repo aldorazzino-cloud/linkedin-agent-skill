@@ -9,6 +9,19 @@ description: >-
 
 # li-audit
 
+## Voice source (read first)
+
+Load the user's voice before writing anything:
+
+1. `~/.claude/linkedin/voice.md`, if it exists.
+2. Otherwise, if an installed skill named `voce-linkedin` is available, load it
+   with the Skill tool and treat its content as voice.md. If the user says the
+   post is for a company page and a skill named `voce-` plus that brand exists
+   (for example `voce-anima-silvae`), load that one instead.
+3. Only if neither exists, ask for three of the user's own past posts.
+
+The voice file wins over any generic technique in this skill.
+
 The only honest source of what works for an account is that account. Every
 rule in every LinkedIn guide, including the ones in this pack, is a prior. The
 user's own last 30 posts are the evidence.

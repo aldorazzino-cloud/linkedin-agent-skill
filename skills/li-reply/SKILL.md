@@ -10,6 +10,19 @@ description: >-
 
 # li-reply
 
+## Voice source (read first)
+
+Load the user's voice before writing anything:
+
+1. `~/.claude/linkedin/voice.md`, if it exists.
+2. Otherwise, if an installed skill named `voce-linkedin` is available, load it
+   with the Skill tool and treat its content as voice.md. If the user says the
+   post is for a company page and a skill named `voce-` plus that brand exists
+   (for example `voce-anima-silvae`), load that one instead.
+3. Only if neither exists, ask for three of the user's own past posts.
+
+The voice file wins over any generic technique in this skill.
+
 The reply thread under your own post is where reach is actually decided. Every
 reply is a second engagement event on the post, and the first hour of replies
 does most of the work. But the value is not equal across comments, so this
