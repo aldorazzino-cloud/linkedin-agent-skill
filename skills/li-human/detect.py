@@ -31,13 +31,12 @@ import unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LEX = os.path.join(HERE, "slop.json")
+sys.path.insert(0, HERE)
+import lang as L  # noqa: E402
 
 SENT_RE = re.compile(r"[^.!?\n]+[.!?]*")
-WORD_RE = re.compile(r"[A-Za-z']+")
-CONTRACTIONS = re.compile(r"\b\w+'(?:s|t|re|ve|ll|d|m)\b", re.IGNORECASE)
-PRONOUNS = re.compile(r"\b(i|me|my|mine|we|us|our|you|your)\b", re.IGNORECASE)
-NUMBERS = re.compile(r"\b\d[\d,.]*%?\b|\$\d")
-PROPER = re.compile(r"(?<![.!?]\s)(?<!^)\b[A-Z][a-z]{2,}\b", re.MULTILINE)
+WORD_RE = L.WORD_RE                     # Unicode-aware: "perché" is one word
+PROPER = re.compile(r"(?<![.!?]\s)(?<!^)\b[A-ZÀ-Ý][a-zà-ÿ]{2,}\b", re.MULTILINE)
 
 
 def clamp(n):
@@ -70,13 +69,13 @@ def check_burstiness(text):
     return score, f"variation {cv:.2f} across {len(lens)} sentences (want 0.55+)"
 
 
-def check_specificity(text):
+def check_specificity(text, cfg):
     """Numbers, names and concrete nouns. Slop is abstract."""
     w = words(text)
     if len(w) < 25:
         return 50.0, "too short to judge"
     per100 = 100 / len(w)
-    hits = len(NUMBERS.findall(text)) + len(set(PROPER.findall(text)))
+    hits = len(cfg["numbers"].findall(text)) + len(set(PROPER.findall(text)))
     density = hits * per100
     score = scale(density, human=6.0, machine=0.5)
     return score, f"{hits} concrete markers, {density:.1f} per 100 words (want 4+)"
@@ -89,8 +88,7 @@ def check_slop(text, lex):
         return 50.0, "empty"
     hits, found = 0, []
     for entry in lex["words"] + lex["phrases"]:
-        pattern = re.compile(r"\b" + re.escape(entry["find"]).replace(r"\ ", r"\s+") + r"\b",
-                             re.IGNORECASE)
+        pattern = L.term_pattern(entry["find"])
         n = len(pattern.findall(text))
         if n:
             hits += n
@@ -103,11 +101,11 @@ def check_slop(text, lex):
     return score, detail
 
 
-def check_fingerprint(text):
+def check_fingerprint(text, cfg):
     """Characters a phone keyboard does not produce."""
     invisible = sum(1 for c in text if unicodedata.category(c) == "Cf")
     em = text.count("—")
-    curly = sum(text.count(c) for c in "‘’“”")
+    curly = sum(text.count(c) for c in cfg["curly"])
     ellip = text.count("…")
     nbsp = sum(text.count(c) for c in "   ")
     total = invisible * 4 + em * 2 + curly + ellip + nbsp
@@ -118,14 +116,14 @@ def check_fingerprint(text):
     return score, detail
 
 
-def check_voice(text, lex):
-    """Contractions, person, and the shapes models default to."""
+def check_voice(text, lex, cfg):
+    """Colloquial markers, person, and the shapes models default to."""
     w = words(text)
     if len(w) < 25:
         return 50.0, "too short to judge"
     per100 = 100 / len(w)
-    contractions = len(CONTRACTIONS.findall(text)) * per100
-    person = len(PRONOUNS.findall(text)) * per100
+    contractions = len(cfg["colloquial"].findall(text)) * per100
+    person = len(cfg["person"].findall(text)) * per100
     tells = 0
     names = []
     for s in lex["structures"]:
@@ -138,13 +136,13 @@ def check_voice(text, lex):
             names.append(s["id"])
     bullets = [len(b.split()) for b in re.findall(r"(?m)^\s*[-*•]\s+(.+)$", text)]
     uniform = (len(bullets) >= 3 and statistics.pstdev(bullets) < 1.6)
-    score = (scale(contractions, human=3.0, machine=0.0) * 0.35
-             + scale(person, human=8.0, machine=1.0) * 0.35
+    score = (scale(contractions, human=cfg["colloquial_human"], machine=0.0) * 0.35
+             + scale(person, human=cfg["person_human"], machine=1.0) * 0.35
              + clamp(100 - tells * 22) * 0.30)
     if uniform:
         score -= 12
         names.append("uniform-bullets")
-    detail = (f"{contractions:.1f} contractions, {person:.1f} personal pronouns "
+    detail = (f"{contractions:.1f} {cfg['colloquial_label']}, {person:.1f} personal pronouns "
               f"per 100 words, {tells} structural tell(s)")
     if names:
         detail += " [" + ", ".join(names[:4]) + "]"
@@ -154,13 +152,14 @@ def check_voice(text, lex):
 CHECKS = ["BURSTINESS", "SPECIFICITY", "SLOP DENSITY", "FINGERPRINT", "VOICE"]
 
 
-def run(text, lex):
+def run(text, lex, language="en"):
+    cfg = L.SETTINGS[language]
     results = {}
     results["BURSTINESS"] = check_burstiness(text)
-    results["SPECIFICITY"] = check_specificity(text)
+    results["SPECIFICITY"] = check_specificity(text, cfg)
     results["SLOP DENSITY"] = check_slop(text, lex)
-    results["FINGERPRINT"] = check_fingerprint(text)
-    results["VOICE"] = check_voice(text, lex)
+    results["FINGERPRINT"] = check_fingerprint(text, cfg)
+    results["VOICE"] = check_voice(text, lex, cfg)
     scores = [results[c][0] for c in CHECKS]
     # The weakest check drags the verdict: a detector only needs one signal.
     overall = statistics.mean(scores) * 0.6 + min(scores) * 0.4
@@ -195,32 +194,38 @@ def main():
     ap.add_argument("input", nargs="?", default="-", help="file, or - for stdin")
     ap.add_argument("compare", nargs="?", help="second file, to show before/after")
     ap.add_argument("--json", action="store_true")
-    ap.add_argument("--lexicon", default=LEX)
+    ap.add_argument("--lexicon", default=None, help="override the lexicon file")
+    ap.add_argument("--lang", default="auto", choices=["auto", "en", "it"])
     args = ap.parse_args()
 
-    lex = json.load(open(args.lexicon, encoding="utf-8"))
     read = lambda p: sys.stdin.read() if p == "-" else open(p, encoding="utf-8").read()
 
     targets = [(args.input, read(args.input))]
     if args.compare:
         targets.append((args.compare, read(args.compare)))
 
+    # One language for the whole run, so before/after are scored the same way.
+    language = L.resolve(args.lang, targets[0][1])
+    lex = json.load(open(args.lexicon or L.LEXICONS[language], encoding="utf-8"))
+
     payload = []
     for name, text in targets:
-        results, overall, verdict = run(text, lex)
+        results, overall, verdict = run(text, lex, language)
         payload.append({
             "source": name,
             "checks": {k: {"score": round(v[0], 1), "detail": v[1]} for k, v in results.items()},
             "human_score": round(overall, 1),
             "verdict": verdict,
+            "language": language,
         })
 
     if args.json:
         print(json.dumps(payload if args.compare else payload[0], indent=2))
         return
 
+    print(f"\n  language: {language}" + ("" if args.lang != "auto" else " (auto)"))
     for (name, text), p in zip(targets, payload):
-        results, overall, verdict = run(text, lex)
+        results, overall, verdict = run(text, lex, language)
         render(results, overall, verdict, label=os.path.basename(name) if args.compare else None)
     if args.compare:
         a, b = payload

@@ -35,6 +35,8 @@ import unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LEX = os.path.join(HERE, "slop.json")
+sys.path.insert(0, HERE)
+import lang as L  # noqa: E402
 
 URL_RE = re.compile(r"https?://\S+|www\.\S+|\S+@\S+\.\S+")
 SENT_RE = re.compile(r"[^.!?\n]+[.!?]*")
@@ -133,10 +135,14 @@ def pass_lexical(text, lex):
                      key=lambda e: len(e["find"]), reverse=True)
     for entry in entries:
         find = entry["find"]
-        pattern = re.compile(r"\b" + re.escape(find).replace(r"\ ", r"\s+") + r"\b",
-                             re.IGNORECASE)
+        pattern = L.term_pattern(find)
         found = pattern.findall(text)
         if not found:
+            continue
+        if entry["replace"] is None:
+            # Flag only: in Italian a blind swap breaks agreement or meaning.
+            hits.append({"find": find, "replace": "(segnalato, riscrivere a mano)",
+                         "count": len(found), "family": entry["family"], "flag": True})
             continue
         hits.append({"find": find, "replace": entry["replace"] or "(deleted)",
                      "count": len(found), "family": entry["family"]})
@@ -145,12 +151,17 @@ def pass_lexical(text, lex):
     text = re.sub(r"[ \t]{2,}", " ", text)
     text = re.sub(r"(?m)^[ \t]*([,.;:])\s*", "", text)
     text = re.sub(r"\s+([,.;:!?])", r"\1", text)
-    text = re.sub(r"(?m)^[ \t]+$", "", text)
+    text = re.sub(r"(?m)^[ \t]+", "", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     # An em dash that became a comma, followed by a sentence connective, leaves
     # a splice ("is important, also, it's proof"). Promote it to a full stop.
-    text = re.sub(r",\s*(also|so|still|basically|in the end)\s*,\s*",
+    text = re.sub(r",\s*(also|so|still|basically|in the end|poi|quindi|però|eppure|alla fine)\s*,\s*",
                   lambda m: ". " + m.group(1)[0].upper() + m.group(1)[1:] + ", ", text)
+    # Deleting an opener ("È importante sottolineare che ...") leaves the
+    # sentence starting in lowercase. Restore the capital at line and
+    # sentence starts.
+    text = re.sub(r"(^|\n|[.!?]\s+)([a-zà-ÿ])",
+                  lambda m: m.group(1) + m.group(2).upper(), text)
     return text, hits
 
 
@@ -199,9 +210,10 @@ def render_report(report, out=sys.stderr):
 
     total = sum(h["count"] for h in report["invisible"]) \
         + sum(h["count"] for h in report["typographic"]) \
-        + sum(h["count"] for h in report["lexical"])
+        + sum(h["count"] for h in report["lexical"] if not h.get("flag"))
 
     head("HUMANIZE REPORT")
+    print(f"language: {report.get('language', 'en')}", file=out)
     print(f"{total} machine artefacts removed, "
           f"{len(report['structures'])} structural tells flagged for rewrite", file=out)
 
@@ -221,7 +233,7 @@ def render_report(report, out=sys.stderr):
         head("4. STRUCTURAL TELLS  (not auto-fixed - rewrite these yourself)")
         for h in report["structures"]:
             print(f"  {h['count']:>3}x  {h['name']}\n        {h['fix']}", file=out)
-    if not any(report.values()):
+    if not any(v for k, v in report.items() if k != "language"):
         head("CLEAN")
         print("  Nothing to strip.", file=out)
     print("", file=out)
@@ -233,12 +245,15 @@ def main():
     ap.add_argument("-o", "--out", help="write cleaned text here instead of stdout")
     ap.add_argument("--report", action="store_true", help="print what changed, to stderr")
     ap.add_argument("--json", action="store_true", help="emit {text, report} as JSON")
-    ap.add_argument("--lexicon", default=LEX, help="path to slop.json")
+    ap.add_argument("--lexicon", default=None, help="override the lexicon file")
+    ap.add_argument("--lang", default="auto", choices=["auto", "en", "it"])
     args = ap.parse_args()
 
     raw = sys.stdin.read() if args.input == "-" else open(args.input, encoding="utf-8").read()
-    lex = load_lexicon(args.lexicon)
+    language = L.resolve(args.lang, raw)
+    lex = load_lexicon(args.lexicon or L.LEXICONS[language])
     clean, report = humanize(raw, lex)
+    report["language"] = language
 
     if args.json:
         print(json.dumps({"text": clean, "report": report}, indent=2, ensure_ascii=False))

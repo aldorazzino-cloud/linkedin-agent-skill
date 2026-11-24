@@ -20,10 +20,53 @@ python3 detect.py draft.txt                    # score it, five checks
 python3 detect.py before.txt after.txt         # prove the delta
 ```
 
-Both read `slop.json`, which is the lexicon: 100+ stock words and phrases with
+Both detect the language of the draft (`--lang auto`, the default) and load
+the matching lexicon: `slop.json` for English, `slop_it.json` for Italian.
+Force it with `--lang it` or `--lang en`. Pass the same `--lang` to every call
+in one job, so before and after are scored the same way.
+
+`slop.json` is the English lexicon: 100+ stock words and phrases with
 plain-English replacements, 17 invisible character classes, 11 typographic
 substitutions, and 11 structural tells. It is meant to be edited. If the user
 has a word they always use that the lexicon strips, remove it from the file.
+
+## Italian (`slop_it.json`)
+
+Italian is scored on its own terms, not as broken English:
+
+- **Words** are matched with accents, so "perché" and "città" count as words.
+- **VOICE** does not look for contractions, which Italian does not have. It
+  counts discourse particles (beh, insomma, cioè, magari, comunque, anzi, un
+  po'), sentences that open on "E" or "Ma", and first and second person,
+  including verb forms that carry the person without a pronoun ("ho visto",
+  "abbiamo chiuso").
+- **FINGERPRINT** does not penalise the curly apostrophe (’). Every phone
+  keyboard types it in "l'azienda". It is still normalised to a straight one.
+  Curly double quotes and em dashes still count.
+- **SPECIFICITY** reads Italian numbers: 1.300, 1,5, 20%, €20.
+- **The lexicon** has about 275 word forms, 50 phrases and 12 structures:
+  fondamentale, cruciale, sfruttare, ottimizzare, valorizzare, sinergia,
+  ecosistema, paradigma, inoltre, pertanto, "nel mondo frenetico di oggi",
+  "è importante sottolineare che", "non si tratta solo di X, ma di Y",
+  "Il risultato?", "Cosa ne pensate?" and the rest.
+
+Most Italian entries have `"replace": null`. That means **flagged, not
+swapped**: in Italian a blind substitution breaks gender and number agreement
+("un mindset aperto" becomes "un mentalità aperto") or the meaning. The report
+lists them as `(segnalato, riscrivere a mano)`. Treat them exactly like the
+structural tells: rewrite the sentence yourself, keep the user's meaning, then
+re-run `detect.py`. Only safe swaps with identical endings are automatic
+(fondamentale -> importante, sfruttano -> usano, robusti -> solidi, inoltre ->
+poi, pertanto -> quindi).
+
+When you rewrite Italian, do not replace one stock word with its stock
+synonym ("cruciale" -> "essenziale"). Replace the abstraction with the fact:
+a number, a name, a thing that happened.
+
+The thresholds (burstiness 0.70, voice targets) were calibrated on English.
+For Italian they are provisional. If three of the user's own hand-written
+posts do not score PASS, the threshold is wrong, not the user: tell them so,
+and use the score only to compare drafts before and after.
 
 ## What gets fixed automatically
 
@@ -71,7 +114,7 @@ PASS, and it is the part a script cannot do.
 | SPECIFICITY | numbers, names, concrete markers per 100 words | abstract nouns, no figures |
 | SLOP DENSITY | lexicon hits per 100 words | stock vocabulary |
 | FINGERPRINT | invisible chars, em dashes, curly quotes per 1k chars | typographically perfect |
-| VOICE | contractions, person, structural tells | no contractions, staged reveals |
+| VOICE | contractions (EN) or colloquial markers (IT), person, structural tells | no contractions, staged reveals |
 
 The verdict weights the mean at 60% and the **weakest single check** at 40%,
 because a detector only needs one signal to fire. PASS needs an overall of 70+

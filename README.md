@@ -84,6 +84,8 @@ python3 detect.py before.txt after.txt       # prove the delta
   are invisible in every editor you own.
 - **Typography.** Em dash to comma, en dash to hyphen, curly quotes to
   straight, ellipsis to three dots.
+- **Italian.** `slop_it.json` plus language detection: see
+  `skills/li-human/SKILL.md`, section "Italian".
 - **The lexicon.** 113 stock words and phrases with plain-English
   replacements - delve, leverage, robust, seamless, crucial, testament to, "in
   today's fast-paced world", "let that sink in" - with capitalisation preserved
@@ -103,7 +105,7 @@ those are handed back for a rewrite rather than mangled by a regex.
 | SPECIFICITY | numbers, names and concrete markers per 100 words |
 | SLOP DENSITY | lexicon hits per 100 words |
 | FINGERPRINT | invisible characters, em dashes, curly quotes per 1,000 |
-| VOICE | contractions, person, structural tells |
+| VOICE | contractions (EN) or colloquial markers (IT), person, structural tells |
 
 The verdict weights the mean at 60% and the **weakest single check** at 40%,
 because a detector only needs one signal to fire.

@@ -26,6 +26,10 @@ at the answers.
 - **Do I swear:** (yes / mild / no)
 - **Emoji:** (never / one, rarely / freely)
 - **Contractions:** (yes - almost always yes)
+- **Language:** (English / Italiano. If Italian, write every draft in Italian
+  and run li-human with `--lang it`.)
+- **Italian only - spoken markers I actually use:** (es. "insomma", "tipo",
+  "comunque", frasi che iniziano con "E" o "Ma")
 
 ## My positions
 

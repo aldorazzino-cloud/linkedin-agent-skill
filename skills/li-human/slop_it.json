@@ -1,0 +1,1846 @@
+{
+ "version": "1.0-it",
+ "note": "Lessico italiano usato da humanize.py e detect.py con --lang it (o auto). replace null = segnala ma non sostituisce: in italiano cambiare la parola spesso rompe accordi o significato, quindi la riscrittura la fa Claude. Modificalo pure: se una parola la usi davvero (es. olistico), toglila.",
+ "invisible": [
+  {
+   "cp": "U+200B",
+   "name": "ZERO WIDTH SPACE",
+   "action": "delete"
+  },
+  {
+   "cp": "U+200C",
+   "name": "ZERO WIDTH NON-JOINER",
+   "action": "delete"
+  },
+  {
+   "cp": "U+200D",
+   "name": "ZERO WIDTH JOINER",
+   "action": "delete"
+  },
+  {
+   "cp": "U+2060",
+   "name": "WORD JOINER",
+   "action": "delete"
+  },
+  {
+   "cp": "U+FEFF",
+   "name": "ZERO WIDTH NO-BREAK SPACE / BOM",
+   "action": "delete"
+  },
+  {
+   "cp": "U+00AD",
+   "name": "SOFT HYPHEN",
+   "action": "delete"
+  },
+  {
+   "cp": "U+180E",
+   "name": "MONGOLIAN VOWEL SEPARATOR",
+   "action": "delete"
+  },
+  {
+   "cp": "U+061C",
+   "name": "ARABIC LETTER MARK",
+   "action": "delete"
+  },
+  {
+   "cp": "U+200E",
+   "name": "LEFT-TO-RIGHT MARK",
+   "action": "delete"
+  },
+  {
+   "cp": "U+200F",
+   "name": "RIGHT-TO-LEFT MARK",
+   "action": "delete"
+  },
+  {
+   "cp": "U+E0000-U+E007F",
+   "name": "TAG CHARACTERS (invisible ASCII smuggling)",
+   "action": "delete"
+  },
+  {
+   "cp": "U+00A0",
+   "name": "NO-BREAK SPACE",
+   "action": "space"
+  },
+  {
+   "cp": "U+202F",
+   "name": "NARROW NO-BREAK SPACE",
+   "action": "space"
+  },
+  {
+   "cp": "U+2009",
+   "name": "THIN SPACE",
+   "action": "space"
+  },
+  {
+   "cp": "U+2007",
+   "name": "FIGURE SPACE",
+   "action": "space"
+  },
+  {
+   "cp": "U+2003",
+   "name": "EM SPACE",
+   "action": "space"
+  },
+  {
+   "cp": "U+2002",
+   "name": "EN SPACE",
+   "action": "space"
+  }
+ ],
+ "typographic": [
+  {
+   "from": "—",
+   "name": "EM DASH",
+   "to": ", "
+  },
+  {
+   "from": "–",
+   "name": "EN DASH",
+   "to": "-"
+  },
+  {
+   "from": "“",
+   "name": "LEFT DOUBLE QUOTE",
+   "to": "\""
+  },
+  {
+   "from": "”",
+   "name": "RIGHT DOUBLE QUOTE",
+   "to": "\""
+  },
+  {
+   "from": "…",
+   "name": "HORIZONTAL ELLIPSIS",
+   "to": "..."
+  },
+  {
+   "from": "′",
+   "name": "PRIME",
+   "to": "'"
+  },
+  {
+   "from": "·",
+   "name": "MIDDLE DOT",
+   "to": "-"
+  },
+  {
+   "from": "•",
+   "name": "BULLET",
+   "to": "-"
+  },
+  {
+   "from": "→",
+   "name": "RIGHTWARDS ARROW",
+   "to": "->"
+  },
+  {
+   "from": "’",
+   "name": "APOSTROFO TIPOGRAFICO (normalizzato, non penalizzato)",
+   "to": "'"
+  }
+ ],
+ "words": [
+  {
+   "find": "fondamentale",
+   "replace": "importante",
+   "family": "aggettivi"
+  },
+  {
+   "find": "fondamentali",
+   "replace": "importanti",
+   "family": "aggettivi"
+  },
+  {
+   "find": "cruciale",
+   "replace": "importante",
+   "family": "aggettivi"
+  },
+  {
+   "find": "cruciali",
+   "replace": "importanti",
+   "family": "aggettivi"
+  },
+  {
+   "find": "robusto",
+   "replace": "solido",
+   "family": "aggettivi"
+  },
+  {
+   "find": "robusta",
+   "replace": "solida",
+   "family": "aggettivi"
+  },
+  {
+   "find": "robusti",
+   "replace": "solidi",
+   "family": "aggettivi"
+  },
+  {
+   "find": "robuste",
+   "replace": "solide",
+   "family": "aggettivi"
+  },
+  {
+   "find": "innovativo",
+   "replace": "nuovo",
+   "family": "aggettivi"
+  },
+  {
+   "find": "innovativa",
+   "replace": "nuova",
+   "family": "aggettivi"
+  },
+  {
+   "find": "innovativi",
+   "replace": "nuovi",
+   "family": "aggettivi"
+  },
+  {
+   "find": "innovative",
+   "replace": "nuove",
+   "family": "aggettivi"
+  },
+  {
+   "find": "trasformativo",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "trasformativa",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "trasformativi",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "trasformative",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "rivoluzionario",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "rivoluzionaria",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "rivoluzionarii",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "rivoluzionarie",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "imprescindibile",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "imprescindibili",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "essenziale",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "essenziali",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "straordinario",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "straordinaria",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "straordinarii",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "straordinarie",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "impeccabile",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "impeccabili",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "sinergico",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "sinergica",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "sinergici",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "sinergice",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "dinamico",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "dinamica",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "dinamici",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "dinamice",
+   "replace": null,
+   "family": "aggettivi"
+  },
+  {
+   "find": "meticoloso",
+   "replace": "attento",
+   "family": "aggettivi"
+  },
+  {
+   "find": "meticolosa",
+   "replace": "attenta",
+   "family": "aggettivi"
+  },
+  {
+   "find": "meticolosi",
+   "replace": "attenti",
+   "family": "aggettivi"
+  },
+  {
+   "find": "meticolose",
+   "replace": "attente",
+   "family": "aggettivi"
+  },
+  {
+   "find": "sfruttare",
+   "replace": "usare",
+   "family": "verbi"
+  },
+  {
+   "find": "sfrutta",
+   "replace": "usa",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttano",
+   "replace": "usano",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttiamo",
+   "replace": "usiamo",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttando",
+   "replace": "usando",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttato",
+   "replace": "usato",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttata",
+   "replace": "usata",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttati",
+   "replace": "usati",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttate",
+   "replace": "usate",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttarne",
+   "replace": "usarne",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttarla",
+   "replace": "usarla",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttarlo",
+   "replace": "usarlo",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttarli",
+   "replace": "usarli",
+   "family": "verbi"
+  },
+  {
+   "find": "sfruttarle",
+   "replace": "usarle",
+   "family": "verbi"
+  },
+  {
+   "find": "sfrutterà",
+   "replace": "userà",
+   "family": "verbi"
+  },
+  {
+   "find": "sfrutteremo",
+   "replace": "useremo",
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizza",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizziamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "ottimizzeremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizza",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizziamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "valorizzeremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementa",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementiamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "implementeremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenzia",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziiamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenziarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenzierà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "potenzieremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluziona",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzioniamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzionerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "rivoluzioneremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasma",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmiamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "plasmeremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestra",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestriamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestrerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "orchestreremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizza",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizziamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "catalizzeremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizza",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzano",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizziamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzando",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzato",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzata",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzati",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzate",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzarne",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzarla",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzarlo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzarli",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzarle",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzerà",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "massimizzeremo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "approfondire",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "approfondiamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "approfondisce",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "esploriamo",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "esplorare",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "esplora",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "navigare le sfide",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "navigare il cambiamento",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "abbracciare il cambiamento",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "intraprendere un percorso",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "intraprendere un viaggio",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "sbloccare il potenziale",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "sbloccare il vero potenziale",
+   "replace": null,
+   "family": "verbi"
+  },
+  {
+   "find": "sinergia",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "sinergie",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "ecosistema",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "paradigma",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "cambio di paradigma",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "panorama",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "tassello",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "tasselli",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "valore aggiunto",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "game changer",
+   "replace": "svolta",
+   "family": "nomi"
+  },
+  {
+   "find": "game-changer",
+   "replace": "svolta",
+   "family": "nomi"
+  },
+  {
+   "find": "mindset",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "pilastro",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "pilastri",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "bussola",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "stella polare",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "arsenale",
+   "replace": null,
+   "family": "nomi"
+  },
+  {
+   "find": "miriade di",
+   "replace": "tanti",
+   "family": "nomi"
+  },
+  {
+   "find": "una miriade di",
+   "replace": "tanti",
+   "family": "nomi"
+  },
+  {
+   "find": "una vasta gamma di",
+   "replace": "molti",
+   "family": "nomi"
+  },
+  {
+   "find": "un'ampia gamma di",
+   "replace": "molti",
+   "family": "nomi"
+  },
+  {
+   "find": "un ventaglio di",
+   "replace": "vari",
+   "family": "nomi"
+  },
+  {
+   "find": "inoltre",
+   "replace": "poi",
+   "family": "connettivi"
+  },
+  {
+   "find": "pertanto",
+   "replace": "quindi",
+   "family": "connettivi"
+  },
+  {
+   "find": "tuttavia",
+   "replace": "però",
+   "family": "connettivi"
+  },
+  {
+   "find": "ciononostante",
+   "replace": "eppure",
+   "family": "connettivi"
+  },
+  {
+   "find": "ciò nonostante",
+   "replace": "eppure",
+   "family": "connettivi"
+  },
+  {
+   "find": "in definitiva",
+   "replace": "alla fine",
+   "family": "connettivi"
+  },
+  {
+   "find": "in sintesi",
+   "replace": "in breve",
+   "family": "connettivi"
+  },
+  {
+   "find": "in conclusione",
+   "replace": "quindi",
+   "family": "connettivi"
+  },
+  {
+   "find": "dunque",
+   "replace": "quindi",
+   "family": "connettivi"
+  },
+  {
+   "find": "altresì",
+   "replace": "anche",
+   "family": "connettivi"
+  },
+  {
+   "find": "nondimeno",
+   "replace": "però",
+   "family": "connettivi"
+  },
+  {
+   "find": "al fine di",
+   "replace": "per",
+   "family": "connettivi"
+  },
+  {
+   "find": "nell'ottica di",
+   "replace": "per",
+   "family": "connettivi"
+  },
+  {
+   "find": "in ottica di",
+   "replace": "per",
+   "family": "connettivi"
+  },
+  {
+   "find": "allo scopo di",
+   "replace": "per",
+   "family": "connettivi"
+  },
+  {
+   "find": "per quanto riguarda",
+   "replace": "su",
+   "family": "connettivi"
+  },
+  {
+   "find": "in merito a",
+   "replace": "su",
+   "family": "connettivi"
+  },
+  {
+   "find": "a tal proposito",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "in quest'ottica",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "in tal senso",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "a 360 gradi",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "a tutto tondo",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "di grande impatto",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "senza precedenti",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "in continua evoluzione",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "in rapida evoluzione",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "giocare un ruolo chiave",
+   "replace": "contare",
+   "family": "connettivi"
+  },
+  {
+   "find": "gioca un ruolo chiave",
+   "replace": "conta",
+   "family": "connettivi"
+  },
+  {
+   "find": "svolge un ruolo cruciale",
+   "replace": "conta",
+   "family": "connettivi"
+  },
+  {
+   "find": "svolge un ruolo chiave",
+   "replace": "conta",
+   "family": "connettivi"
+  },
+  {
+   "find": "svolgono un ruolo cruciale",
+   "replace": "contano",
+   "family": "connettivi"
+  },
+  {
+   "find": "svolgono un ruolo chiave",
+   "replace": "contano",
+   "family": "connettivi"
+  },
+  {
+   "find": "giocano un ruolo chiave",
+   "replace": "contano",
+   "family": "connettivi"
+  },
+  {
+   "find": "un ruolo chiave",
+   "replace": "un ruolo importante",
+   "family": "connettivi"
+  },
+  {
+   "find": "mettere a terra",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "fare la differenza",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "fa la differenza",
+   "replace": null,
+   "family": "connettivi"
+  },
+  {
+   "find": "testimonianza di",
+   "replace": "prova di",
+   "family": "connettivi"
+  }
+ ],
+ "phrases": [
+  {
+   "find": "è importante sottolineare che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "è importante notare che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "va sottolineato che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "vale la pena notare che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "vale la pena sottolineare che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "è fondamentale ricordare che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "è bene ricordare che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "non è un segreto che",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "diciamolo chiaramente,",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "diciamocelo,",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "lascia che te lo dica,",
+   "replace": "",
+   "family": "frasi fatte"
+  },
+  {
+   "find": "nel mondo frenetico di oggi",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "nel mondo di oggi",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "nel panorama attuale",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "nell'era digitale",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "nell'era dell'intelligenza artificiale",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "in un mondo in cui",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "in un mondo sempre più",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "immagina un mondo in cui",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "facciamo un passo indietro",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "la verità è che",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "la dura verità è che",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "ecco il punto",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "il punto è questo",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "ecco cosa ho imparato",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "ecco cosa ho capito",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "rileggi questa frase",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "rifletti su questo",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "pensaci un attimo",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "pensateci",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "spoiler",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "plot twist",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "senza ulteriori indugi",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "allacciate le cinture",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "il futuro è adesso",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "il futuro è già qui",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "sono entusiasta di annunciare",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "sono felice di condividere",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "sono orgoglioso di annunciare",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "sono onorato di",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "ho avuto l'opportunità di",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "alla fine della fiera",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "salva questo post",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "cosa ne pensate?",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "tu cosa ne pensi?",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "fatemelo sapere nei commenti",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "scrivilo nei commenti",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "dimmelo nei commenti",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "siete d'accordo?",
+   "replace": null,
+   "family": "frasi fatte"
+  },
+  {
+   "find": "sei d'accordo?",
+   "replace": null,
+   "family": "frasi fatte"
+  }
+ ],
+ "structures": [
+  {
+   "id": "non-solo",
+   "name": "\"Non si tratta solo di X, ma di Y\"",
+   "regex": "(?i)\\bnon (?:si tratta|è) (?:solo|soltanto|semplicemente) [^.!?\\n]{2,80}[,.;]\\s*(?:ma|è|si tratta)\\b",
+   "fix": "Dì Y e basta. La negazione messa in scena è il tic più riconoscibile."
+  },
+  {
+   "id": "non-solo-ma-anche",
+   "name": "\"Non solo X, ma anche Y\"",
+   "regex": "(?i)\\bnon solo\\b[^.!?\\n]{2,80}\\bma anche\\b",
+   "fix": "Scegli quello che conta e dillo da solo."
+  },
+  {
+   "id": "non-e-x-e-y",
+   "name": "\"Non è X. È Y.\"",
+   "regex": "(?i)\\bnon è [^.!?\\n]{2,50}[.!]\\s*È\\b",
+   "fix": "Togli la frase in negativo."
+  },
+  {
+   "id": "il-risultato",
+   "name": "Domanda-teaser di una parola (\"Il risultato?\")",
+   "regex": "(?im)^\\s*(?:il risultato|la verità|il segreto|il problema|la parte migliore|la svolta|la lezione|il motivo|la risposta)\\?\\s*$",
+   "fix": "Dì direttamente la cosa."
+  },
+  {
+   "id": "ecco-perche",
+   "name": "\"Ecco perché\" / \"Ecco come\" a inizio riga",
+   "regex": "(?im)^\\s*ecco (?:perché|come|cosa|il motivo)\\b",
+   "fix": "Entra nel merito senza annunciarlo."
+  },
+  {
+   "id": "triade",
+   "name": "Triade (X, Y e Z.)",
+   "regex": "(?i)\\b\\w+, \\w+ e \\w+\\.",
+   "fix": "Tieni le due cose vere o aggiungi una quarta più storta."
+  },
+  {
+   "id": "emoji-razzo",
+   "name": "Emoji da template",
+   "regex": "[🚀🔥💡✨🎯👇✅]",
+   "fix": "Toglile o usane una sola che diresti a voce."
+  },
+  {
+   "id": "muro-hashtag",
+   "name": "Muro di hashtag",
+   "regex": "(?:#\\w+[ \\t]*){5,}",
+   "fix": "Massimo tre, in fondo."
+  },
+  {
+   "id": "in-conclusione",
+   "name": "Chiusa da tema (\"In conclusione\", \"In sintesi\")",
+   "regex": "(?im)^\\s*(?:in conclusione|in sintesi|riassumendo|per concludere)\\b",
+   "fix": "Finisci sull'idea, non sul riassunto."
+  },
+  {
+   "id": "esca-commenti",
+   "name": "Esca per i commenti",
+   "regex": "(?im)(?:cosa ne pensate\\?|tu cosa ne pensi\\?|siete d'accordo\\?|sei d'accordo\\?|chi altro\\?|sbaglio\\?)\\s*$",
+   "fix": "Fai una domanda specifica a cui si risponde con un'esperienza, o niente."
+  },
+  {
+   "id": "come-ai",
+   "name": "Residuo da modello",
+   "regex": "(?i)\\bcome (?:modello linguistico|intelligenza artificiale|IA),",
+   "fix": "Eliminare."
+  },
+  {
+   "id": "lista-due-punti",
+   "name": "Titoletti in grassetto con due punti",
+   "regex": "(?m)^\\s*(?:[-*]\\s*)?\\*\\*[^*\\n]{2,40}:\\*\\*",
+   "fix": "Su LinkedIn il grassetto non c'è: scrivi frasi."
+  }
+ ]
+}
